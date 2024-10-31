@@ -55,6 +55,14 @@ class Actividad {
         return ejecutarConsulta($sql); // Esto ya está bien
     }
     
+    public function listar_actividades_rango($fecha_inicio, $fecha_fin, $team_id) {
+        $sql = "SELECT nombre, descripcion, fecha_actividad 
+                FROM actividad 
+                WHERE block_id = '$team_id' 
+                AND fecha_actividad BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+        return ejecutarConsulta($sql);
+    }
+    
     
 }
 ?>

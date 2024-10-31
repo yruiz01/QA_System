@@ -28,9 +28,8 @@ if ($_SESSION['grupos'] == 1) {
       <div class="box">
 <div class="box-header with-border">
   <h1 class="box-title">Grupo: <?php echo $nombre_grupo; ?> <button class="btn btn-success" onclick="mostrarform(true)" id="btnagregar"><i class="fa fa-plus-circle"></i>Agregar Beneficiario</button>  </h1>
-   <a id="btnasistencia" href="asistencia.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-warning"><i class='fa fa-check'></i> Asignacion a Actividades</a>
-  <a  id="btnconducta" href="conducta.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-primary"><i class='fa fa-smile-o'></i> Estado</a>
-  <a  id="btnactividad" href="actividad.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-primary"><i class='fa fa-calendar'></i> Actividades</a>
+  <a  id="btnconducta" href="conducta.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-primary"><i class='fa fa-smile-o'></i> Asistencia</a>
+  <a  id="btnactividad" href="actividad.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-primary"><i class='fa fa-calendar'></i> Ver Actividades</a>
   <a id="btncalificaciones" href="calificaciones.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-danger"><i class='fa fa-tasks'></i> Asignacion a Proyectos</a>
   <a id="btncursos" href="cursos.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-primary"><i class='fa fa-th-large'></i> Proyectos</a>
   <a  id="btnlistas" href="listasis.php?idgrupo=<?php echo $idgrupo; ?>" class="btn btn-info"><i class='fa fa-th-list'></i> Listas</a>
@@ -68,7 +67,6 @@ if ($_SESSION['grupos'] == 1) {
       <th>Telefono</th>
       <th>Dirección</th>
       <th>Email</th>
-      <!-- Nuevos campos -->
       <th>DPI</th>
       <th>Ocupación</th>
       <th>Edad</th>
@@ -138,7 +136,6 @@ if ($_SESSION['grupos'] == 1) {
     <select name="funcion" id="funcion" class="form-control" required>
         <option value="Socio">Socio</option>
         <option value="Participante">Participante</option>
-        <option value="Guia">Guía</option>
     </select>
     </div>
 

@@ -4,7 +4,6 @@ require_once "../modelos/Cursos.php";
 
 $cursos = new Cursos();
 
-// Recibir los valores del formulario
 $idcurso = isset($_POST["idcurso"]) ? limpiarCadena($_POST["idcurso"]) : "";
 $nombre = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : "";
 $team_id = isset($_POST["idgrupo"]) ? limpiarCadena($_POST["idgrupo"]) : "";
@@ -19,15 +18,12 @@ $archivo_pdf = isset($_POST["archivo_pdfactual"]) ? limpiarCadena($_POST["archiv
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
-        // Si hay un archivo nuevo, procesarlo
         if (!file_exists($_FILES['archivo_pdf']['tmp_name']) || !is_uploaded_file($_FILES['archivo_pdf']['tmp_name'])) {
-            $archivo_pdf = $_POST["archivo_pdfactual"];  // Mantener el archivo PDF actual
+            $archivo_pdf = $_POST["archivo_pdfactual"]; 
         } else {
-            // Procesar un nuevo archivo PDF
             $ext = explode(".", $_FILES["archivo_pdf"]["name"]);
             if ($_FILES['archivo_pdf']['type'] == "application/pdf") {
-                $archivo_pdf = round(microtime(true)) . '.' . end($ext);  // Generar un nombre único
-
+                $archivo_pdf = round(microtime(true)) . '.' . end($ext); 
                 // Crear la carpeta si no existe
                 if (!file_exists('../files/cursos')) {
                     mkdir('../files/cursos', 0777, true);
@@ -42,16 +38,16 @@ switch ($_GET["op"]) {
         if (empty($idcurso)) {
             // Insertar nuevo curso
             $rspta = $cursos->insertar($nombre, $team_id, $descripcion, $fecha_inicio, $fecha_fin, $fecha_alerta, $estado_alerta, $responsable, $contribucion_proyecto, $archivo_pdf);
-            echo $rspta ? "Proyecto registrado correctamente" : "No se pudo registrar el curso";
+            echo $rspta ? "Proyecto registrado correctamente" : "No se pudo registrar el Proyecto";
         } else {
             // Editar curso existente
             $rspta = $cursos->editar($idcurso, $nombre, $team_id, $descripcion, $fecha_inicio, $fecha_fin, $fecha_alerta, $estado_alerta, $responsable, $contribucion_proyecto, $archivo_pdf);
-            echo $rspta ? "Proyecto actualizado correctamente" : "No se pudo actualizar el curso";
+            echo $rspta ? "Proyecto actualizado correctamente" : "No se pudo actualizar el Proyecto";
         }
         break;
 
     case 'listar':
-        $rspta = $cursos->listar($_REQUEST["idgrupo"]);  // Función listar en el modelo
+        $rspta = $cursos->listar($_REQUEST["idgrupo"]);
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
@@ -71,9 +67,12 @@ switch ($_GET["op"]) {
                 "7" => $reg->estado_alerta,
                 "8" => $reg->responsable,
                 "9" => $reg->contribucion_proyecto,
-                "10" => '<a href="../files/cursos/' . $reg->archivo_pdf . '" target="_blank">Ver PDF</a>'
+                "10" => '<a href="../files/cursos/' . $reg->archivo_pdf . '" target="_blank" class="btn btn-outline-primary" title="Abrir PDF">
+                    <i class="fa fa-file-pdf-o" style="font-size: 18px; color: #D32F2F;"></i>
+                 </a>'
             );
         }
+        
         $results = array(
             "sEcho" => 1,  // Información para datatables
             "iTotalRecords" => count($data),  // Total de registros
@@ -91,25 +90,27 @@ switch ($_GET["op"]) {
     case 'desactivar':
         $rspta = $cursos->desactivar($idcurso);
         if ($rspta) {
-            echo "Curso desactivado correctamente";
+            echo "Proyecto desactivado correctamente";
         } else {
-            echo "No se pudo desactivar el curso";
+            echo "No se pudo desactivar el Proyecto";
         }
         break;
 
     case 'activar':
         $rspta = $cursos->activar($idcurso);
         if ($rspta) {
-            echo "Curso activado correctamente";
+            echo "Proyecto activado correctamente";
         } else {
-            echo "No se pudo activar el curso";
+            echo "No se pudo activar el Proyecto";
         }
         break;
 		case 'selectCursos':
 			$team_id=$_REQUEST["idgrupo"];
 	
 			$rspta=$cursos->listar($team_id);
-				echo '<option value="0">seleccione...</option>';
+            echo '<select class="custom-select" name="proyecto" style="font-weight: bold; color: #001f3f;">'; 
+            echo '<option value="0" disabled selected style="color: #001f3f;">*Seleccione un Proyecto *</option>'; 
+
 	
 				while ($reg = $rspta->fetch_object()) {
 					echo '<option value='.$reg->id.'>'.$reg->name.'</option>';

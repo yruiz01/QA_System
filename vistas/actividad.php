@@ -37,14 +37,12 @@ if (!isset($_SESSION['nombre'])) {
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Tabla para listar las actividades - Debajo del selector -->
                         <div class="panel-body table-responsive" id="listadoregistros">
                             <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead>
                                     <tr>
                                         <th>Opciones</th>
-                                        <th>Nombre</th>
+                                        <th>Actividad</th>
                                         <th>Descripción</th>
                                         <th>Fecha Límite</th>
                                         <th>Estado</th>
@@ -55,7 +53,7 @@ if (!isset($_SESSION['nombre'])) {
                                 <tfoot>
                                     <tr>
                                         <th>Opciones</th>
-                                        <th>Nombre</th>
+                                        <th>Actividad</th>
                                         <th>Descripción</th>
                                         <th>Fecha Límite</th>
                                         <th>Estado</th>
@@ -80,7 +78,7 @@ if (!isset($_SESSION['nombre'])) {
                                             <div class="form-group">
                                                 <input type="hidden" id="id_actividad" name="id_actividad">
                                                 <input type="hidden" id="idcurso" name="idcurso">
-                                                <label for="nombre">Nombre(*):</label>
+                                                <label for="nombre">Nombre Actividad(*):</label>
                                                 <input class="form-control" type="text" id="nombre" name="nombre" required>
                                             </div>
                                             <div class="form-group">

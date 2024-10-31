@@ -21,8 +21,7 @@ if (!isset($_SESSION['nombre'])) {
                                         <a href="../vistas/vista_grupo.php?idgrupo=<?php echo $_GET["idgrupo"]; ?>"><i class='fa fa-arrow-circle-left'></i> Volver</a>
                                     </li>
                                     <li class="bg-aqua"><a href="#tab_1-1" data-toggle="tab">Proyectos</a></li>
-                                    <li class="bg-yellow"><a href="#tab_2-2" data-toggle="tab">Estado</a></li>
-                                    <li class="bg-green"><a href="#tab_3-2" data-toggle="tab">Asistencia</a></li>
+                                    <li class="bg-yellow"><a href="#tab_2-2" data-toggle="tab">Asistencia</a></li>
                                     <li class="active bg-blue"><a href="#tab_4-2" data-toggle="tab">Actividades</a></li> <!-- Nueva pestaña de Actividades -->
                                     <li class="pull-left header"><i class="fa fa-list"></i> Listas</li>
                                 </ul>
@@ -52,22 +51,6 @@ if (!isset($_SESSION['nombre'])) {
                                         </div>
                                     </div>
 
-                                    <!-- Asistencia -->
-                                    <div class="tab-pane" id="tab_3-2">
-                                        <div class="table-responsive">
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <label>Fecha Inicio</label>
-                                                <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php echo date("Y-m-d"); ?>">
-                                            </div>
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <label>Fecha Fin</label>
-                                                <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo date("Y-m-d"); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="panel-body table-responsive" id="listadoregistros">
-                                            <div id="data"></div>
-                                        </div>
-                                    </div>
 
                                     <!-- Nueva pestaña de Actividades -->
                                     <div class="tab-pane active" id="tab_4-2">

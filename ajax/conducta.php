@@ -14,14 +14,13 @@ $user_id=$_SESSION["idusuario"];
 switch ($_GET["op"]) {
 	case 'guardaryeditar':
 	if (empty($id)) {
-		$rspta=$conducta->insertar($kind_id,$date_at,$alumn_id,$team_id); 
+		$rspta = $conducta->insertar($kind_id, $date_at, $alumn_id, $team_id); 
 		echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
-	}else{
-         $rspta=$conducta->editar($id,$kind_id,$date_at,$alumn_id,$team_id);
+	} else {
+         $rspta = $conducta->editar($id, $kind_id, $date_at, $alumn_id, $team_id);
 		echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
 	}
 		break;
-	
 
 	case 'desactivar':
 		$rspta=$conducta->desactivar($id);

@@ -6,6 +6,7 @@ function init(){
    listar();
    listarc();
    listar_calificacion();
+   listar_actividades(); 
    $("#fecha_inicio").change(listar);
    $("#fecha_fin").change(listar);
 
@@ -28,16 +29,18 @@ function listar(){
 
 //funcion listar comportamiento
 function listarc(){
-	var  fecha_inicio = $("#fecha_inicioc").val();
+    var fecha_inicio = $("#fecha_inicioc").val();
     var fecha_fin = $("#fecha_finc").val();
-	var  team_id = $("#idgrupo").val();
-	$.post("../ajax/consultas.php?op=lista_comportamiento",{fecha_inicioc:fecha_inicio, fecha_finc:fecha_fin, idgrupo:team_id},
-		function(data,status)
-		{
-			console.log(data);
-			$("#datac").html(data);
-		})
+    var team_id = $("#idgrupo").val();
+    
+    $.post("../ajax/consultas.php?op=lista_comportamiento", {fecha_inicioc: fecha_inicio, fecha_finc: fecha_fin, idgrupo: team_id},
+        function(data, status) {
+            console.log(data);
+            $("#datac").html(data);
+        }
+    );
 }
+
 
 //funcion listar comportamiento
 function listar_calificacion(){
@@ -62,9 +65,4 @@ function listar_actividades() {
             $("#dataa").html(data);                // Insertar los datos en el contenedor #dataa
         });
 }
-
-
 init();
-
-
-

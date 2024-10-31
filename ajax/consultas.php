@@ -210,14 +210,13 @@ switch ($_GET["op"]) {
                     ?> 
                     <td >
                     <?php
-                    if($regc!=null){
-                        if($regc->kind_id==1){ echo "<strong>N</stron>"; }
-                        else if($regc->kind_id==2){ echo "<strong>B</stron>"; }
-                        else if($regc->kind_id==3){ echo "<strong>E</stron>"; }
-                        else if($regc->kind_id==4){ echo "<strong>M</stron>"; }
-                        else if($regc->kind_id==5){ echo "<strong>MM</stron>"; }
-                        
-                    }   
+                   if ($regc != null) {
+                    if ($regc->kind_id == 1) {
+                        echo "<span style='font-size: 12px;'>✅</span>"; 
+                    } else if ($regc->kind_id == 2) {
+                        echo "<span style='font-size: 12px;'>❌</span>"; 
+                    }
+                }                                                                                                        
                     ?>
 
                     </td>

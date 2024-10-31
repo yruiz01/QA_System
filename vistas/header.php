@@ -194,17 +194,6 @@ if (strlen(session_id())<1)
           </span>
         </a>
         <ul class="treeview-menu">
-        <li><a href="asistencia.php?idgrupo=<?php echo $_GET["idgrupo"]; ?>"><i class="fa fa-circle-o"></i> Agregar</a></li>
-        </ul>
-      </li>
-        <li class="treeview">
-        <a href="#">
-          <i class="fa fa-smile-o"></i> <span>Estado</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
         <li><a href="conducta.php?idgrupo=<?php echo $_GET["idgrupo"]; ?>"><i class="fa fa-circle-o"></i> Agregar</a></li>
         </ul>
       </li>
@@ -221,7 +210,7 @@ if (strlen(session_id())<1)
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-th-large"></i> <span>Actividades</span>
+          <i class="fa fa-th-large"></i> <span> Ver Actividades</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
