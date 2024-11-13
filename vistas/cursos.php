@@ -33,12 +33,12 @@ if (!isset($_SESSION['nombre'])) {
                     <th>Descripción</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
-                    <th>Estado</th>
                     <th>Fecha Alerta</th>
                     <th>Estado Alerta</th>
                     <th>Responsable</th>
                     <th>Contribución Proyecto</th>
                     <th>Archivo PDF</th>
+                    <th>Estado</th>
                   </thead>
                   <tbody>
                   </tbody>
@@ -48,12 +48,12 @@ if (!isset($_SESSION['nombre'])) {
                     <th>Descripción</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
-                    <th>Estado</th>
                     <th>Fecha Alerta</th>
                     <th>Estado Alerta</th>
                     <th>Responsable</th>
                     <th>Contribución Proyecto</th>
                     <th>Archivo PDF</th>
+                    <th>Estado</th>
                   </tfoot>
                 </table>
               </div>
@@ -87,10 +87,10 @@ if (!isset($_SESSION['nombre'])) {
                   </div>
 
                   <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                    <label for="">Estado de Alerta</label>
+                    <label for="">Estado</label>
                     <select class="form-control" name="estado_alerta" id="estado_alerta">
-                      <option value="Pendiente">Pendiente</option>
-                      <option value="Enviado">Enviado</option>
+                      <option value="Vigente">Vigente</option>
+                      <option value="Vencido">Vencido</option>
                     </select>
                   </div>
 

@@ -21,6 +21,7 @@ switch ($_GET["op"]) {
 		echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
 	}
 		break;
+	
 
 	case 'desactivar':
 		$rspta=$conducta->desactivar($id);

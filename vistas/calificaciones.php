@@ -47,7 +47,8 @@ if ($_SESSION['grupos']==1) {
       <th>Nombre</th>
       <th>Apellidos</th>
       <th>Telefono</th>
-      <th>Asistencia</th>
+      <th>Estado</th>
+      <th>Asignación</th>
     </thead>
     <tbody>
     </tbody>
@@ -57,7 +58,8 @@ if ($_SESSION['grupos']==1) {
       <th>Nombre</th>
       <th>Apellidos</th>
       <th>Telefono</th>
-      <th>Asistencia</th>
+      <th>Estado</th>
+      <th>Asignación</th>
     </tfoot>   
   </table>
 </div>

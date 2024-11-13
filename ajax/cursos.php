@@ -11,10 +11,10 @@ $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"
 $fecha_inicio = isset($_POST["fecha_inicio"]) ? limpiarCadena($_POST["fecha_inicio"]) : "";
 $fecha_fin = isset($_POST["fecha_fin"]) ? limpiarCadena($_POST["fecha_fin"]) : "";
 $fecha_alerta = isset($_POST["fecha_alerta"]) ? limpiarCadena($_POST["fecha_alerta"]) : "";
-$estado_alerta = isset($_POST["estado_alerta"]) ? limpiarCadena($_POST["estado_alerta"]) : "";
 $responsable = isset($_POST["responsable"]) ? limpiarCadena($_POST["responsable"]) : "";
 $contribucion_proyecto = isset($_POST["contribucion_proyecto"]) ? limpiarCadena($_POST["contribucion_proyecto"]) : "";
 $archivo_pdf = isset($_POST["archivo_pdfactual"]) ? limpiarCadena($_POST["archivo_pdfactual"]) : "";
+$estado_alerta = isset($_POST["estado_alerta"]) ? limpiarCadena($_POST["estado_alerta"]) : "";
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
@@ -57,19 +57,19 @@ switch ($_GET["op"]) {
                 : '<button class="btn btn-success" onclick="activar(' . $reg->id . ')"><i class="fa fa-check"></i></button>';
             
             $data[] = array(
-                "0" => '<button class="btn btn-warning" onclick="mostrar(' . $reg->id . ')"><i class="fa fa-pencil"></i></button>' . $botonEstado,
+                "0" => ($reg->is_active) ? '<button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->id . ')"><i class="fa fa-pencil"></i></button>' . ' ' . '<button class="btn btn-danger btn-xs" onclick="desactivar(' . $reg->id . ')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-warning btn-xs" onclick="mostrar(' . $reg->id . ')"><i class="fa fa-pencil"></i></button>' . ' ' . '<button class="btn btn-primary btn-xs" onclick="activar(' . $reg->id . ')"><i class="fa fa-check"></i></button>',
                 "1" => $reg->name,
                 "2" => $reg->descripcion,
                 "3" => $reg->fecha_inicio,
                 "4" => $reg->fecha_fin,
-                "5" => $estadoLabel,
-                "6" => $reg->fecha_alerta,
-                "7" => $reg->estado_alerta,
-                "8" => $reg->responsable,
-                "9" => $reg->contribucion_proyecto,
-                "10" => '<a href="../files/cursos/' . $reg->archivo_pdf . '" target="_blank" class="btn btn-outline-primary" title="Abrir PDF">
+                "5" => $reg->fecha_alerta,
+                "6" => $reg->estado_alerta,
+                "7" => $reg->responsable,
+                "8" => $reg->contribucion_proyecto,
+                "9" => '<a href="../files/cursos/' . $reg->archivo_pdf . '" target="_blank" class="btn btn-outline-primary" title="Abrir PDF">
                     <i class="fa fa-file-pdf-o" style="font-size: 18px; color: #D32F2F;"></i>
-                 </a>'
+                 </a>',
+                 "10" => ($reg->is_active)?'<span class="label bg-green">Activo</span>':'<span class="label bg-red">Inactivo</span>'
             );
         }
         

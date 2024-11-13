@@ -9,6 +9,7 @@ $id = isset($_POST["idcalificacion"]) ? limpiarCadena($_POST["idcalificacion"]) 
 $val = isset($_POST["valor"]) ? limpiarCadena($_POST["valor"]) : "";
 $alumn_id = isset($_POST["alumn_id"]) ? limpiarCadena($_POST["alumn_id"]) : "";
 $block_id = isset($_POST["idcurso"]) ? limpiarCadena($_POST["idcurso"]) : "";
+$is_active = isset($_POST["is_active"]) ? limpiarCadena($_POST["is_active"]) : "";
 $user_id = $_SESSION["idusuario"];
 
 switch ($_GET["op"]) {
@@ -37,18 +38,21 @@ switch ($_GET["op"]) {
         echo json_encode($rspta);
         break;
 
-    case 'verificar':
-        // Verifica si ya existe una calificación para este alumno y proyecto
-        $rspta = $asistencia->verificar($alumn_id, $block_id);
+        case 'verificar':
+            // Verifica si ya existe una calificación para este alumno y curso
+            $rspta = $asistencia->verificar($alumn_id, $block_id);
+            
+            if ($rspta != null) {
+                // Si ya existe, muestra un mensaje que el beneficiario ya fue asignado
+                echo json_encode(['status' => 'error', 'message' => 'El beneficiario ya fue asignado a este curso.']);
+            } else {
+                // Si no existe, procede a asignar la calificación
+                $rspta = $asistencia->insertar(1, $alumn_id, $block_id);
+                echo json_encode(['status' => 'success', 'message' => $rspta ? "Calificación asignada exitosamente" : "No se pudo asignar la calificación"]);
+            }
+            break;
         
-        if ($rspta == null) {
-            // Si no existe, inserta directamente el valor 1
-            $rspta = $asistencia->insertar(1, $alumn_id, $block_id);
-            echo $rspta ? "Beneficiario asignado exitosamente" : "No se pudo asignar el beneficiario";
-        } else {
-            echo json_encode($rspta); // Ya existe una calificación
-        }
-        break;
+        
 
     case 'listar':
         require_once "../modelos/Alumnos.php";
@@ -70,7 +74,8 @@ switch ($_GET["op"]) {
                 "2" => $reg->name, 
                 "3" => $reg->lastname,
                 "4" => $reg->phone,
-                "5" => '<button class="btn btn-info btn-xs" onclick="verificar('.$reg->id.')"><i class="fa fa-check"></i> Asignar</button>'
+                "5" => $reg->is_active,
+                "6" => '<button class="btn btn-info btn-xs" onclick="verificar('.$reg->id.')"><i class="fa fa-check"></i> Asignar</button>'
             );
         }
 

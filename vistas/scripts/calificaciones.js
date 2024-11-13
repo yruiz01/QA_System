@@ -27,45 +27,45 @@ $("#curso").change(function(){
 
 });
 
-//FUNCION PARA VERIFICAR SI YA SE INGRESO UNA CALIFICACION DE UN CURSO
+
+
 function verificar(id){
-	var idcurso = $("#idcurso").val();
+    var idcurso = $("#curso").val();
 
-	$.post("../ajax/calificaciones.php?op=verificar",{alumn_id:id, idcurso:idcurso},
-		function(data,status)
-		{
-				data=JSON.parse(data);
-				if(data==null && $("#idcurso").val()!=0){
-
-					$("#getCodeModal").modal('show');
-				 	$.post("../ajax/alumnos.php?op=mostrar",{idalumno : id},
-						function(data,status)
-						{
-						data=JSON.parse(data);
-						$("#alumn_id").val(data.id);
-						});
-				}else if(data=!null && $("#idcurso").val()!=0){
-					 $("#getCodeModal").modal('show');
-				 	$.post("../ajax/calificaciones.php?op=verificar",{alumn_id:id, idcurso:idcurso},
-					function(data,status)
-					{
-						data=JSON.parse(data);
-						$("#idcalificacion").val(data.id);
-						$("#alumn_id").val(data.alumn_id);
-						$("#valor").val(data.val);
-						$("#idcurso").val(data.block_id);
-					});
-
-				}else if($("#idcurso").val()==0){
-					bootbox.alert('Seleciona un curso');
-					}
-		})
-	limpiar();
-		
+    if (idcurso == 0) {
+        bootbox.alert('Por favor, selecciona un curso antes de asignar una calificación.');
+        return; 
+    }
+    $.post("../ajax/calificaciones.php?op=verificar", {alumn_id:id, idcurso:idcurso},
+        function(data,status)
+        {
+            data = JSON.parse(data);
+            if(data == null && idcurso != 0){
+                $("#getCodeModal").modal('show');
+                $.post("../ajax/alumnos.php?op=mostrar", {idalumno : id},
+                    function(data, status)
+                    {
+                        data = JSON.parse(data);
+                        $("#alumn_id").val(data.id);
+                    });
+            } else if(data != null && idcurso != 0){
+                $("#getCodeModal").modal('show');
+                $.post("../ajax/calificaciones.php?op=verificar", {alumn_id:id, idcurso:idcurso},
+                    function(data, status)
+                    {
+                        data = JSON.parse(data);
+                        $("#idcalificacion").val(data.id);
+                        $("#alumn_id").val(data.alumn_id);
+                        $("#valor").val(data.val);
+                        $("#idcurso").val(data.block_id);
+                    });
+            } else if(idcurso == 0){
+                bootbox.alert('Selecciona un curso.');
+            }
+        });
+    limpiar();
 }
 
-
-//funcion limpiar
 function limpiar(){
 	$("#idcalificacion").val("");
 	$("#alumn_id").val("");

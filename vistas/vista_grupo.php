@@ -49,13 +49,14 @@ if ($_SESSION['grupos'] == 1) {
       <th>Apellidos</th>
       <th>Telefono</th>
       <th>Dirección</th>
-      <th>Email</th>
       <th>DPI</th>
       <th>Ocupación</th>
       <th>Edad</th>
       <th>Hijos</th>
       <th>Género</th>
       <th>Función</th>
+      <th>Estado</th>
+
     </thead>
     <tbody>
     </tbody>
@@ -66,13 +67,13 @@ if ($_SESSION['grupos'] == 1) {
       <th>Apellidos</th>
       <th>Telefono</th>
       <th>Dirección</th>
-      <th>Email</th>
       <th>DPI</th>
       <th>Ocupación</th>
       <th>Edad</th>
       <th>Hijos</th>
       <th>Género</th>
       <th>Función</th>
+      <th>Estado</th>
     </tfoot>   
   </table>
 </div>
@@ -93,21 +94,9 @@ if ($_SESSION['grupos'] == 1) {
       <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required>
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Email(*)</label>
-      <input class="form-control" type="email" name="email" id="email" maxlength="256" placeholder="ejemplo@ejemplo.com">
-    </div>
-    <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Teléfono(*)</label>
       <input class="form-control" type="text" name="telefono" id="telefono" placeholder="Teléfono" required>
     </div>
-    <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Imagen:</label>
-      <input class="form-control" type="file" name="imagen" id="imagen">
-      <input type="hidden" name="imagenactual" id="imagenactual">
-      <img src="" alt="" width="150px" height="120" id="imagenmuestra">
-    </div>
-    
-    <!-- Nuevos campos -->
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">DPI:</label>
       <input class="form-control" type="text" name="dpi" id="dpi" maxlength="13" placeholder="DPI" required>
@@ -138,6 +127,25 @@ if ($_SESSION['grupos'] == 1) {
         <option value="Participante">Participante</option>
     </select>
     </div>
+
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+    <label for="imagen">Imagen:</label>
+    <input class="form-control" type="file" name="imagen" id="imagen" onchange="previewImage(event)">
+    <input type="hidden" name="imagenactual" id="imagenactual">
+    <img src="" alt="Imagen Previsualizada" width="150px" height="120px" id="imagenmuestra" style="display:none;">
+  </div>
+
+  <script>
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('imagenmuestra');
+        output.src = reader.result;
+        output.style.display = 'block'; 
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
 
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>

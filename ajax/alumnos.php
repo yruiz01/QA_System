@@ -7,27 +7,16 @@ $alumnos = new Alumnos();
 
 $id = isset($_POST["idalumno"]) ? limpiarCadena($_POST["idalumno"]) : "";
 $image = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "";
-
 $name = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : "";
 $lastname = isset($_POST["apellidos"]) ? limpiarCadena($_POST["apellidos"]) : "";
-$email = isset($_POST["email"]) ? limpiarCadena($_POST["email"]) : "";
 $address = isset($_POST["direccion"]) ? limpiarCadena($_POST["direccion"]) : "";
 $phone = isset($_POST["telefono"]) ? limpiarCadena($_POST["telefono"]) : "";
-
-// Nuevos campos
 $dpi = isset($_POST["dpi"]) ? limpiarCadena($_POST["dpi"]) : "";
 $ocupacion = isset($_POST["ocupacion"]) ? limpiarCadena($_POST["ocupacion"]) : "";
 $edad = isset($_POST["edad"]) ? limpiarCadena($_POST["edad"]) : "";
 $hijos = isset($_POST["hijos"]) ? limpiarCadena($_POST["hijos"]) : "";
 $genero = isset($_POST["genero"]) ? limpiarCadena($_POST["genero"]) : "";
-$funcion = isset($_POST["funcion"]) ? limpiarCadena($_POST["funcion"]) : "";  // Asegúrate de capturar correctamente el valor
-
-// Contacto 1
-$c1_fullname = isset($_POST["c1_nombres"]) ? limpiarCadena($_POST["c1_nombres"]) : "";
-$c1_address = isset($_POST["c1_direccion"]) ? limpiarCadena($_POST["c1_direccion"]) : "";
-$c1_phone = isset($_POST["c1_telefono"]) ? limpiarCadena($_POST["c1_telefono"]) : "";
-$c1_note = isset($_POST["c1_nota"]) ? limpiarCadena($_POST["c1_nota"]) : "";
-
+$funcion = isset($_POST["funcion"]) ? limpiarCadena($_POST["funcion"]) : "";  
 $team_id = isset($_POST["idgrupo"]) ? limpiarCadena($_POST["idgrupo"]) : "";
 $user_id = $_SESSION["idusuario"];
 
@@ -44,11 +33,11 @@ switch ($_GET["op"]) {
         }
         if (empty($id)) {
 			// Insertar nuevo registro
-			$rspta = $alumnos->insertar($image, $name, $lastname, $email, $address, $phone, $c1_fullname, $c1_address, $c1_phone, $c1_note, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion); 
+			$rspta = $alumnos->insertar($image, $name, $lastname,  $address, $phone, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion); 
 			echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 		} else {
 			// Editar registro existente
-			$rspta = $alumnos->editar($id, $image, $name, $lastname, $email, $address, $phone, $c1_fullname, $c1_address, $c1_phone, $c1_note, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion);
+			$rspta = $alumnos->editar($id, $image, $name, $lastname, $address, $phone, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion);
 			echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
 		}		
         break;
@@ -81,14 +70,14 @@ switch ($_GET["op"]) {
                 "3" => $reg->lastname,
                 "4" => $reg->phone,
                 "5" => $reg->address,
-                "6" => $reg->email,
-                // Nuevos campos
-                "7" => $reg->dpi,
-                "8" => $reg->ocupacion,
-                "9" => $reg->edad,
-                "10" => $reg->hijos,
-                "11" => $reg->genero,
-                "12" => $reg->funcion
+                "6" => $reg->dpi,
+                "7" => $reg->ocupacion,
+                "8" => $reg->edad,
+                "9" => $reg->hijos,
+                "10" => $reg->genero,
+                "11" => $reg->funcion,
+                "12" => ($reg->is_active)?'<span class="label bg-green">Activo</span>':'<span class="label bg-red">Inactivo</span>'
+
             );
         }
         $results = array(

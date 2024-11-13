@@ -92,7 +92,7 @@ if ($_SESSION['grupos']==1) {
                         <input type="hidden" id="idgrupo" name="idgrupo" value="<?php echo $idgrupo; ?>">
                         <div class="form-group text-center mt-3">
                             <button class="btn btn-primary" type="submit" id="btnGuardar_asis"><i class="fa fa-save"></i> Guardar</button>
-                            <button class="btn btn-danger" data-dismiss="modal" type="button"><i class="fa fa-times-circle"></i> Cancelar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button"><i class="fa fa-times-circle"></i> Cancelar</button>
                         </div>
                     </form>
                 </div>

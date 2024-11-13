@@ -261,7 +261,7 @@ if (strlen(session_id())<1)
         }
         ?> 
       
-        <li><a href="https://sede.seg-social.gob.es/wps/wcm/connect/sede/ba0c79db-2448-4adb-a069-faf6b27a1cfb/Manual+ayuda+alta+empresa.+CCC+inicial.pdf?MOD=AJPERES"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow"></small></a></li>
+        <li><a href="https://www.canva.com/design/DAGTHDu637A/m0HJOpjIDFhj8ASkunaJ4g/edit?utm_content=DAGTHDu637A&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow"></small></a></li>
         <li><a href="https://www.qachuualoom.org" target="_blanck"><i class="fa  fa-exclamation-circle"></i> <span>Acerca de</span><small class="label pull-right bg-yellow"></small></a></li>   
         
       </ul>

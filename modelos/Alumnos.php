@@ -10,9 +10,9 @@ class Alumnos{
 	} 
 
 	// Método para insertar registro
-	public function insertar($image, $name, $lastname, $email, $address, $phone, $c1_fullname, $c1_address, $c1_phone, $c1_note, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion){
-		$sql = "INSERT INTO alumn (image, name, lastname, email, address, phone, c1_fullname, c1_address, c1_phone, c1_note, dpi, ocupacion, edad, hijos, genero, funcion, is_active, user_id)
-				VALUES ('$image', '$name', '$lastname', '$email', '$address', '$phone', '$c1_fullname', '$c1_address', '$c1_phone', '$c1_note', '$dpi', '$ocupacion', '$edad', '$hijos', '$genero', '$funcion', '1', '$user_id')";
+	public function insertar($image, $name, $lastname, $address, $phone, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion){
+		$sql = "INSERT INTO alumn (image, name, lastname, address, phone, dpi, ocupacion, edad, hijos, genero, funcion, is_active, user_id)
+				VALUES ('$image', '$name', '$lastname', '$address', '$phone',  '$dpi', '$ocupacion', '$edad', '$hijos', '$genero', '$funcion', '1', '$user_id')";
 		
 		$idalumno_new = ejecutarConsulta_retornarID($sql);
 		$sw = true;
@@ -24,8 +24,8 @@ class Alumnos{
 	}
 
 // Método para editar registro
-	public function editar($id, $image, $name, $lastname, $email, $address, $phone, $c1_fullname, $c1_address, $c1_phone, $c1_note, $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion) {
-    	$sql = "UPDATE alumn SET image='$image', name='$name', lastname='$lastname', email='$email', address='$address', phone='$phone', c1_fullname='$c1_fullname', c1_address='$c1_address', c1_phone='$c1_phone', c1_note='$c1_note', dpi='$dpi', ocupacion='$ocupacion', edad='$edad', hijos='$hijos', genero='$genero', funcion='$funcion', user_id='$user_id'
+	public function editar($id, $image, $name, $lastname, $address, $phone,  $user_id, $team_id, $dpi, $ocupacion, $edad, $hijos, $genero, $funcion) {
+    	$sql = "UPDATE alumn SET image='$image', name='$name', lastname='$lastname', address='$address', phone='$phone', dpi='$dpi', ocupacion='$ocupacion', edad='$edad', hijos='$hijos', genero='$genero', funcion='$funcion', user_id='$user_id'
             WHERE id='$id'";
     		return ejecutarConsulta($sql);
 	}
@@ -44,15 +44,15 @@ class Alumnos{
 
 	// Método para mostrar un registro
 	public function mostrar($id) {
-		$sql = "SELECT id, image, name, lastname, email, address, phone, dpi, ocupacion, edad, hijos, genero, funcion
+		$sql = "SELECT id, image, name, lastname, address, phone, dpi, ocupacion, edad, hijos, genero, funcion
 				FROM alumn WHERE id='$id'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 	// Listar registros
 	public function listar($team_id){
-		$sql = "SELECT a.id, a.image, a.name, a.lastname, a.email, a.address, a.phone, a.c1_fullname, a.c1_address, a.c1_phone, a.c1_note, a.dpi, a.ocupacion, a.edad, a.hijos, a.genero, a.funcion, a.is_active, a.user_id 
+		$sql = "SELECT a.id, a.image, a.name, a.lastname, a.address, a.phone, a.dpi, a.ocupacion, a.edad, a.hijos, a.genero, a.funcion, a.is_active, a.user_id 
 				FROM alumn a INNER JOIN alumn_team alt ON a.id=alt.alumn_id 
-				WHERE a.is_active=1 AND alt.team_id='$team_id' 
+				WHERE alt.team_id='$team_id' 
 				ORDER BY a.id DESC";
 		return ejecutarConsulta($sql);
 	}
@@ -65,15 +65,6 @@ class Alumnos{
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	// Listar registros para calificaciones
-	public function listar_calif($team_id){
-		$sql = "SELECT a.id AS idalumn, a.image, a.name, a.lastname, a.email, a.address, a.phone, a.c1_fullname, a.c1_address, a.c1_phone, a.c1_note, a.dpi, a.ocupacion, a.edad, a.hijos, a.genero, a.funcion, a.is_active, a.user_id 
-				FROM alumn a INNER JOIN alumn_team alt ON a.id=alt.alumn_id 
-				WHERE a.is_active=1 AND alt.team_id='$team_id' 
-				ORDER BY a.id DESC";
-		return ejecutarConsulta($sql); 
-	}
-
 	public function listarPorActividad($idactividad) {
 		$sql = "SELECT a.id, a.name, a.lastname 
 				FROM alumn a
@@ -82,7 +73,6 @@ class Alumnos{
 		return ejecutarConsulta($sql);
 	}
 
-	 // Listar beneficiarios NO asignados a una actividad
 	 public function listarNoAsignados($idactividad) {
         $sql = "SELECT a.id, a.name, a.lastname 
                 FROM alumn a 

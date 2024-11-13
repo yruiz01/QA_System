@@ -24,8 +24,8 @@ function init() {
     $("#imagenmuestra").hide();
 }
 
-
 function verificar(id) {
+    console.log("Función verificar ejecutada con id:", id);
     var idgrupo = $("#idgrupo").val();
     var fecha_conducta = $("#fecha_conducta").val();
 
@@ -34,22 +34,33 @@ function verificar(id) {
         return;
     }
 
-    $.post("../ajax/conducta.php?op=verificar", {fecha_conducta: fecha_conducta, alumn_id: id, idgrupo: idgrupo},
-        function(data, status) {
-            data = JSON.parse(data);
-            if (data == null) {
-                $("#getCodeModal").modal("show");
-                $("#alumn_id").val(id); 
-            } else {
-                alert("Conducta ya registrada para esta fecha");
-            }
+    // Imprimir en consola para verificar el valor de idgrupo
+    console.log("Valor de idgrupo:", idgrupo);
+
+    $.post("../ajax/conducta.php?op=verificar", {
+        fecha_conducta: fecha_conducta,
+        alumn_id: id,
+        idgrupo: idgrupo  // Asegúrate de que esta línea esté correctamente definida
+    },
+    function(data, status) {
+        data = JSON.parse(data);
+        if (data == null) {
+            $("#getCodeModal").modal("show");
+            $("#alumn_id").val(id); 
+        } else {
+            alert("Conducta ya registrada para esta fecha");
         }
-    );
+    });
 }
+
 
 // Función para guardar la conducta desde el modal
 function guardarConducta() {
     var formData = new FormData($("#formulario_asis")[0]);
+
+    // Añadir los valores de fecha y tipo de asistencia
+    formData.append("fecha_conducta", $("#fecha_conducta_modal").val());
+    formData.append("tipo_asistencia", $("#tipo_asistencia").val());
 
     $.ajax({
         url: "../ajax/conducta.php?op=guardaryeditar",
@@ -64,6 +75,7 @@ function guardarConducta() {
         }
     });
 }
+
 
 // Función para limpiar el formulario del modal
 function limpiar() {
